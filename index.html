@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="rose-garden">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Our Little World — a private romantic space for Yousef & Agatha. Messages, memories, and little moments, forever ours." />
+  <title>Our Little World ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..800;1,6..12,300..800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/welcome.css" />
+  <link rel="stylesheet" href="assets/css/chat.css" />
+  <link rel="stylesheet" href="assets/css/memories.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E8B4BE'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>" />
+</head>
+<body>
+
+  <!-- ══════════════ WELCOME SCREEN ══════════════ -->
+  <section id="welcome-screen" class="welcome" aria-label="Welcome">
+    <div class="welcome-bg" aria-hidden="true">
+      <div class="welcome-orb orb-1"></div>
+      <div class="welcome-orb orb-2"></div>
+      <div class="welcome-orb orb-3"></div>
+      <div class="particle-field" id="particle-field"></div>
+    </div>
+
+    <div class="welcome-inner">
+      <div class="welcome-heart" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="heart-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+
+      <h1 class="welcome-title">Welcome to our <em>little world</em> <span class="title-heart">♡</span></h1>
+      <p class="welcome-subtitle">A little place for us, away from everything else.</p>
+
+      <div class="profile-cards">
+        <article class="profile-card" data-persona="Yousef">
+          <div class="profile-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          </div>
+          <h2 class="profile-name">Yousef</h2>
+          <p class="profile-tag">Your little corner is waiting.</p>
+          <button class="btn btn-primary profile-enter" data-enter="Yousef">Enter as Yousef</button>
+        </article>
+
+        <article class="profile-card" data-persona="Agatha">
+          <div class="profile-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9z"/><path d="M12 22C7.03 22 3 17.97 3 13c4.97 0 9 4.03 9 9z"/><path d="M12 13V2"/><path d="M12 6c2.21 0 4-1.79 4-4-2.21 0-4 1.79-4 4z"/></svg>
+          </div>
+          <h2 class="profile-name">Agatha</h2>
+          <p class="profile-tag">A little love is waiting for you.</p>
+          <button class="btn btn-primary profile-enter" data-enter="Agatha">Enter as Agatha</button>
+        </article>
+      </div>
+
+      <form id="name-form" class="name-form" novalidate>
+        <label class="visually-hidden" for="name-input">Your name</label>
+        <input id="name-input" type="text" placeholder="Enter your name..." autocomplete="off" maxlength="30" />
+        <button type="submit" class="btn btn-ghost">Step Inside ♡</button>
+      </form>
+      <p id="name-error" class="name-error" role="alert" hidden></p>
+
+      <p class="welcome-note">Two hearts. One little world. Endless little memories.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════ MAIN APP ══════════════ -->
+  <div id="app" class="app" hidden>
+
+    <!-- Demo / connection banner -->
+    <div id="mode-banner" class="mode-banner" hidden></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Navigation">
+      <div class="sidebar-brand">
+        <svg viewBox="0 0 24 24" class="brand-heart" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <div>
+          <span class="brand-title">Our Little World</span>
+          <span class="brand-sub">for two ♡</span>
+        </div>
+      </div>
+
+      <div class="sidebar-couple" id="sidebar-couple">
+        <div class="couple-avatar avatar-yousef" title="Yousef">Y</div>
+        <svg viewBox="0 0 24 24" class="couple-heart" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <div class="couple-avatar avatar-agatha" title="Agatha">A</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="chat" aria-label="Conversation"><i data-lucide="message-circle-heart"></i><span>Conversation</span></button>
+        <button class="nav-item" data-view="memories" aria-label="Memory Box"><i data-lucide="gift"></i><span>Memory Box</span></button>
+        <button class="nav-item" data-view="gallery" aria-label="Shared photos"><i data-lucide="image"></i><span>Shared Photos</span></button>
+        <button class="nav-item" data-view="favorites" aria-label="Favorite messages"><i data-lucide="bookmark"></i><span>Little Things I Love</span></button>
+      </nav>
+
+      <div class="sidebar-section">
+        <span class="sidebar-label">Theme</span>
+        <div class="theme-picker" id="theme-picker" role="radiogroup" aria-label="Color theme">
+          <button class="theme-swatch" data-theme-choice="rose-garden" role="radio" aria-checked="true" aria-label="Rose Garden theme"><span style="background:linear-gradient(135deg,#FFF8F2,#E8B4BE)"></span>Rose Garden</button>
+          <button class="theme-swatch" data-theme-choice="lavender-dreams" role="radio" aria-checked="false" aria-label="Lavender Dreams theme"><span style="background:linear-gradient(135deg,#F4F2FF,#BAAAD7)"></span>Lavender Dreams</button>
+          <button class="theme-swatch" data-theme-choice="midnight-letters" role="radio" aria-checked="false" aria-label="Midnight Letters theme"><span style="background:linear-gradient(135deg,#2B2233,#514052)"></span>Midnight Letters</button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="nav-item" id="settings-btn" aria-label="Settings"><i data-lucide="settings"></i><span>Settings</span></button>
+        <button class="nav-item" id="switch-persona-btn" aria-label="Switch person"><i data-lucide="repeat"></i><span>Switch person</span></button>
+      </div>
+    </aside>
+    <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+    <!-- Main column -->
+    <main class="main-col">
+
+      <!-- ── Chat view ── -->
+      <section id="view-chat" class="view view-chat active" aria-label="Conversation">
+        <header class="chat-header">
+          <button class="icon-btn drawer-toggle" id="drawer-toggle" aria-label="Open menu"><i data-lucide="menu"></i></button>
+          <div class="chat-header-text">
+            <h2 class="chat-title">Yousef <span class="inline-heart">♡</span> Agatha</h2>
+            <p class="chat-subtitle">
+              Our little corner of the universe.
+              <span id="presence-status" class="presence" hidden></span>
+              <span id="day-counter" class="day-counter" hidden></span>
+            </p>
+          </div>
+          <div class="chat-header-actions">
+            <button class="icon-btn" id="header-memories-btn" aria-label="Open Memory Box"><i data-lucide="gift"></i></button>
+            <button class="icon-btn" id="header-gallery-btn" aria-label="Open shared photos"><i data-lucide="image"></i></button>
+          </div>
+        </header>
+
+        <div class="chat-scroll" id="chat-scroll">
+          <div class="load-older-wrap">
+            <button class="btn btn-ghost btn-sm" id="load-older-btn" hidden>Load older messages</button>
+          </div>
+          <div id="message-list" class="message-list" aria-live="polite"></div>
+          <div id="chat-empty" class="chat-empty" hidden>
+            <p class="empty-title">A quiet little world… for now.</p>
+            <p class="empty-sub">Send the first message and start your story. ♡</p>
+          </div>
+        </div>
+
+        <!-- Attachment preview bar -->
+        <div id="attachment-preview" class="attachment-preview" hidden>
+          <img id="attachment-preview-img" alt="Selected image preview" />
+          <div class="attachment-preview-info">
+            <span id="attachment-preview-name"></span>
+            <span id="attachment-preview-size" class="muted"></span>
+          </div>
+          <button class="icon-btn" id="attachment-cancel" aria-label="Remove attachment"><i data-lucide="x"></i></button>
+        </div>
+
+        <!-- Composer -->
+        <form id="composer" class="composer">
+          <button type="button" class="icon-btn" id="emoji-btn" aria-label="Insert emoji"><i data-lucide="smile"></i></button>
+          <button type="button" class="icon-btn" id="attach-btn" aria-label="Attach a photo"><i data-lucide="paperclip"></i></button>
+          <input type="file" id="attach-input" accept="image/jpeg,image/png,image/webp" hidden />
+          <label class="visually-hidden" for="composer-input">Message</label>
+          <textarea id="composer-input" rows="1" placeholder="Write something lovely…" maxlength="4000"></textarea>
+          <button type="submit" class="send-btn" id="send-btn" aria-label="Send message">
+            <i data-lucide="send-horizontal"></i>
+          </button>
+        </form>
+        <div id="emoji-picker" class="emoji-picker" hidden role="menu" aria-label="Emoji picker"></div>
+      </section>
+
+      <!-- ── Memory Box view ── -->
+      <section id="view-memories" class="view view-memories" aria-label="Memory Box">
+        <header class="section-header">
+          <div>
+            <h2 class="section-title">Our Memory Box <span class="sparkle">✨</span></h2>
+            <p class="section-subtitle">Little moments, forever ours.</p>
+          </div>
+          <button class="btn btn-primary" id="add-memory-btn">+ Add a Memory</button>
+        </header>
+
+        <div id="memory-timeline" class="memory-timeline"></div>
+
+        <div id="memory-empty" class="memory-empty" hidden>
+          <div class="memory-empty-box" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+          </div>
+          <p class="empty-title">Our story is still being written. ♡</p>
+          <p class="empty-sub">Save a little moment whenever you want to keep it forever.</p>
+          <button class="btn btn-primary" id="empty-add-memory-btn">Create Your First Memory</button>
+        </div>
+      </section>
+
+      <!-- ── Gallery view ── -->
+      <section id="view-gallery" class="view view-gallery" aria-label="Shared photos">
+        <header class="section-header">
+          <div>
+            <h2 class="section-title">Shared Photos</h2>
+            <p class="section-subtitle">Every picture you've sent each other, in one place.</p>
+          </div>
+          <select id="gallery-sort" class="select" aria-label="Sort photos">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+          </select>
+        </header>
+        <div id="gallery-grid" class="gallery-grid"></div>
+        <div id="gallery-empty" class="memory-empty" hidden>
+          <p class="empty-title">No photos yet.</p>
+          <p class="empty-sub">Attach a photo to a message or a memory and it will appear here.</p>
+        </div>
+        <div class="load-older-wrap"><button class="btn btn-ghost btn-sm" id="gallery-more-btn" hidden>Load more photos</button></div>
+      </section>
+
+      <!-- ── Favorites view ── -->
+      <section id="view-favorites" class="view view-favorites" aria-label="Favorite messages">
+        <header class="section-header">
+          <div>
+            <h2 class="section-title">Little Things I Love ♡</h2>
+            <p class="section-subtitle">Messages you've bookmarked — just for you.</p>
+          </div>
+        </header>
+        <div id="favorites-list" class="favorites-list"></div>
+        <div id="favorites-empty" class="memory-empty" hidden>
+          <p class="empty-title">Nothing bookmarked yet.</p>
+          <p class="empty-sub">Tap the little bookmark on any message to keep it here.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Contextual panel (desktop) -->
+    <aside class="context-panel" id="context-panel" aria-label="Highlights">
+      <div class="context-block">
+        <h3 class="context-title">Recent photos</h3>
+        <div id="context-photos" class="context-photos"></div>
+      </div>
+      <div class="context-block">
+        <h3 class="context-title">Featured memory</h3>
+        <div id="context-memory" class="context-memory"></div>
+      </div>
+    </aside>
+
+    <!-- Mobile bottom navigation -->
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+      <button class="bottom-nav-item active" data-view="chat" aria-label="Chat"><i data-lucide="message-circle-heart"></i><span>Chat</span></button>
+      <button class="bottom-nav-item" data-view="memories" aria-label="Memories"><i data-lucide="gift"></i><span>Memories</span></button>
+      <button class="bottom-nav-item" data-view="gallery" aria-label="Photos"><i data-lucide="image"></i><span>Photos</span></button>
+      <button class="bottom-nav-item" data-view="favorites" aria-label="Favorites"><i data-lucide="bookmark"></i><span>Saved</span></button>
+    </nav>
+  </div>
+
+  <!-- ══════════════ MEMORY MODAL ══════════════ -->
+  <div id="memory-modal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="memory-modal-title">
+      <header class="modal-header">
+        <h3 id="memory-modal-title">Add a Memory</h3>
+        <button class="icon-btn" id="memory-modal-close" aria-label="Close"><i data-lucide="x"></i></button>
+      </header>
+      <form id="memory-form" class="modal-body">
+        <label class="field">
+          <span>Title</span>
+          <input type="text" id="memory-title" maxlength="80" placeholder="A Little Moment ♡" required />
+        </label>
+        <label class="field">
+          <span>Caption or story</span>
+          <textarea id="memory-caption" rows="3" maxlength="1000" placeholder="What made this moment special?"></textarea>
+        </label>
+        <div class="field-row">
+          <label class="field">
+            <span>Date</span>
+            <input type="date" id="memory-date" />
+          </label>
+          <label class="field">
+            <span>Location <em class="muted">(optional)</em></span>
+            <input type="text" id="memory-location" maxlength="80" placeholder="Somewhere lovely" />
+          </label>
+        </div>
+        <div class="field">
+          <span>Photos</span>
+          <button type="button" class="btn btn-ghost btn-sm" id="memory-photos-btn"><i data-lucide="image-plus"></i> Choose photos</button>
+          <input type="file" id="memory-photos-input" accept="image/jpeg,image/png,image/webp" multiple hidden />
+          <div id="memory-photos-preview" class="memory-photos-preview"></div>
+        </div>
+        <p id="memory-form-error" class="form-error" role="alert" hidden></p>
+        <div id="memory-upload-progress" class="upload-progress" hidden>
+          <div class="upload-progress-bar"><span id="memory-upload-bar"></span></div>
+          <span id="memory-upload-label">Uploading…</span>
+        </div>
+        <footer class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="memory-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="memory-save">Save Memory ♡</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══════════════ MEMORY DETAIL MODAL ══════════════ -->
+  <div id="memory-detail" class="modal-backdrop" hidden>
+    <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="memory-detail-title">
+      <header class="modal-header">
+        <h3 id="memory-detail-title"></h3>
+        <div class="modal-header-actions">
+          <button class="icon-btn" id="memory-detail-edit" aria-label="Edit memory"><i data-lucide="pencil"></i></button>
+          <button class="icon-btn danger" id="memory-detail-delete" aria-label="Delete memory"><i data-lucide="trash-2"></i></button>
+          <button class="icon-btn" id="memory-detail-close" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+      </header>
+      <div class="modal-body" id="memory-detail-body"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ IMAGE VIEWER ══════════════ -->
+  <div id="image-viewer" class="image-viewer" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="icon-btn viewer-close" id="viewer-close" aria-label="Close viewer"><i data-lucide="x"></i></button>
+    <button class="icon-btn viewer-prev" id="viewer-prev" aria-label="Previous photo"><i data-lucide="chevron-left"></i></button>
+    <img id="viewer-img" alt="" />
+    <button class="icon-btn viewer-next" id="viewer-next" aria-label="Next photo"><i data-lucide="chevron-right"></i></button>
+    <p id="viewer-caption" class="viewer-caption"></p>
+  </div>
+
+  <!-- ══════════════ REACTION PICKER (popover) ══════════════ -->
+  <div id="reaction-picker" class="reaction-picker" hidden role="menu" aria-label="React to message"></div>
+
+  <!-- ══════════════ SETTINGS MODAL ══════════════ -->
+  <div id="settings-modal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+      <header class="modal-header">
+        <h3 id="settings-title">Settings</h3>
+        <button class="icon-btn" id="settings-close" aria-label="Close"><i data-lucide="x"></i></button>
+      </header>
+      <div class="modal-body">
+        <div class="settings-block">
+          <h4>Connection</h4>
+          <p id="settings-connection" class="muted"></p>
+        </div>
+        <div class="settings-block">
+          <h4>Signed in as</h4>
+          <p id="settings-persona" class="muted"></p>
+        </div>
+        <div class="settings-block">
+          <h4>A gentle note on privacy</h4>
+          <p class="muted">Choosing a name on the welcome screen picks which side of the conversation you see — it is <strong>not</strong> a password and cannot prove who you are. For a truly private two-person space, enable Supabase Auth (email sign-in) and the secure database policies described in the README.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <!-- Floating heart layer for reaction animations -->
+  <div id="heart-layer" class="heart-layer" aria-hidden="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/themes.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/uploads.js"></script>
+  <script src="assets/js/reactions.js"></script>
+  <script src="assets/js/favorites.js"></script>
+  <script src="assets/js/messages.js"></script>
+  <script src="assets/js/memories.js"></script>
+  <script src="assets/js/chat.js"></script>
+  <script src="assets/js/login.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

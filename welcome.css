@@ -1,0 +1,187 @@
+/* ═══════════════════════════════════════════════════════
+   Our Little World ♡ — welcome.css
+   Immersive opening screen
+   ═══════════════════════════════════════════════════════ */
+
+.welcome {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: calc(2rem + env(safe-area-inset-top)) 1.2rem calc(2rem + env(safe-area-inset-bottom));
+  overflow: hidden;
+  transition: opacity 0.7s var(--ease-soft), transform 0.7s var(--ease-soft);
+}
+.welcome.leaving {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+.welcome-bg { position: absolute; inset: 0; pointer-events: none; }
+
+.welcome-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  animation: orbFloat 14s ease-in-out infinite;
+}
+.orb-1 {
+  width: 420px; height: 420px;
+  background: var(--color-rose);
+  top: -120px; inset-inline-start: -100px;
+}
+.orb-2 {
+  width: 360px; height: 360px;
+  background: var(--color-lavender);
+  bottom: -100px; inset-inline-end: -80px;
+  animation-delay: -5s;
+}
+.orb-3 {
+  width: 260px; height: 260px;
+  background: var(--color-peach);
+  top: 40%; inset-inline-start: 60%;
+  animation-delay: -9s;
+}
+[data-theme="midnight-letters"] .welcome-orb { opacity: 0.28; }
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(24px, -28px) scale(1.06); }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  animation: particleDrift var(--dur, 12s) ease-in-out var(--delay, 0s) infinite;
+}
+@keyframes particleDrift {
+  0% { opacity: 0; transform: translateY(20px); }
+  15% { opacity: 0.5; }
+  85% { opacity: 0.35; }
+  100% { opacity: 0; transform: translateY(-90px); }
+}
+
+.welcome-inner {
+  position: relative;
+  text-align: center;
+  max-width: 640px;
+  width: 100%;
+  animation: welcomeIn 0.9s var(--ease-soft);
+}
+@keyframes welcomeIn {
+  from { opacity: 0; transform: translateY(24px); }
+}
+
+.welcome-heart {
+  width: 74px; height: 74px;
+  margin: 0 auto 1.2rem;
+  display: grid;
+  place-items: center;
+}
+.heart-svg {
+  width: 100%; height: 100%;
+  fill: var(--accent);
+  filter: drop-shadow(0 0 18px var(--accent)) drop-shadow(0 0 42px color-mix(in srgb, var(--accent) 55%, transparent));
+  animation: heartbeat 2.8s ease-in-out infinite;
+}
+
+.welcome-title {
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  line-height: 1.12;
+  margin-bottom: 0.6rem;
+}
+.welcome-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-strong);
+}
+.title-heart { color: var(--accent); font-family: var(--font-body); }
+
+.welcome-subtitle {
+  color: var(--muted);
+  font-size: clamp(1rem, 2.6vw, 1.15rem);
+  margin: 0 0 2.2rem;
+}
+
+/* ── Profile cards ── */
+.profile-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.1rem;
+  margin-bottom: 1.8rem;
+}
+.profile-card {
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.4rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-soft);
+}
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lift);
+}
+.profile-icon {
+  width: 52px; height: 52px;
+  margin: 0 auto 0.8rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+.profile-icon svg { width: 26px; height: 26px; }
+.profile-name { font-size: 1.5rem; margin-bottom: 0.25rem; }
+.profile-tag { color: var(--muted); font-size: 0.9rem; margin: 0 0 1.1rem; }
+.profile-enter { width: 100%; }
+
+/* ── Name form ── */
+.name-form {
+  display: flex;
+  gap: 0.6rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.name-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.72rem 1.1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.name-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.name-form input.shake { animation: shake 0.4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.name-error {
+  margin: 0.6rem 0 0;
+  color: #B44454;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+[data-theme="midnight-letters"] .name-error { color: #F0A3AE; }
+
+.welcome-note {
+  margin: 2.4rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+}

@@ -1,0 +1,272 @@
+/* ═══════════════════════════════════════════════════════
+   Our Little World ♡ — memories.css
+   Memory Box, gallery, favorites
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Memory timeline ── */
+.memory-timeline {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.4rem 1.8rem 2rem;
+}
+.memory-group { margin-bottom: 2rem; }
+.memory-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0 0 0.9rem;
+  font-family: var(--font-body);
+}
+.memory-group-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.1rem;
+}
+
+.memory-card {
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-soft);
+  animation: msgIn 0.4s var(--ease-spring);
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 0;
+}
+.memory-card:hover {
+  transform: translateY(-4px) rotate(-0.4deg);
+  box-shadow: var(--shadow-lift), var(--shadow-glow);
+}
+.memory-card-cover {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--accent-soft);
+  overflow: hidden;
+}
+.memory-card-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s var(--ease-soft);
+}
+.memory-card:hover .memory-card-cover img { transform: scale(1.05); }
+.memory-card-cover .no-photo {
+  width: 100%; height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--accent-soft), var(--surface-soft));
+}
+.memory-photo-count {
+  position: absolute;
+  bottom: 0.5rem;
+  inset-inline-end: 0.5rem;
+  background: rgba(40, 30, 42, 0.72);
+  color: #FFF;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(4px);
+}
+.memory-card-body { padding: 0.9rem 1rem 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.25rem; }
+.memory-card-title { font-size: 1.12rem; }
+.memory-card-caption {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.memory-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+.memory-card-meta time { color: var(--accent-strong); font-weight: 800; }
+.memory-card-flags { display: inline-flex; gap: 0.3rem; align-items: center; }
+.memory-card-flags .fav { color: var(--accent-strong); }
+.memory-card-flags svg { width: 13px; height: 13px; }
+
+.memory-sample-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-full);
+  padding: 0.05rem 0.45rem;
+}
+
+/* ── Memory detail ── */
+.memory-detail-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.memory-detail-photos button {
+  padding: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+}
+.memory-detail-photos img { width: 100%; height: 100%; object-fit: cover; }
+.memory-detail-caption { font-size: 0.98rem; margin: 0 0 0.8rem; white-space: pre-wrap; }
+.memory-detail-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.memory-detail-meta strong { color: var(--accent-strong); }
+.memory-detail-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.memory-photos-preview {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.memory-photos-preview .preview-item {
+  position: relative;
+  width: 72px; height: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.memory-photos-preview img { width: 100%; height: 100%; object-fit: cover; }
+.preview-remove {
+  position: absolute;
+  top: 2px; inset-inline-end: 2px;
+  width: 20px; height: 20px;
+  border-radius: var(--radius-full);
+  background: rgba(40, 30, 42, 0.75);
+  color: #FFF;
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+/* ── Empty memory box art ── */
+.memory-empty-box {
+  width: 84px; height: 84px;
+  margin: 0 auto 1rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  animation: boxGlow 3.4s ease-in-out infinite;
+}
+.memory-empty-box svg { width: 42px; height: 42px; }
+@keyframes boxGlow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 30%, transparent); }
+  50% { box-shadow: 0 0 0 14px transparent; }
+}
+
+/* ── Gallery ── */
+.gallery-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.4rem 1.8rem 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.7rem;
+  align-content: start;
+}
+.gallery-item {
+  position: relative;
+  padding: 0;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  animation: msgIn 0.35s var(--ease-spring);
+}
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s var(--ease-soft);
+}
+.gallery-item:hover img { transform: scale(1.06); }
+.gallery-item .gallery-source {
+  position: absolute;
+  bottom: 0; inset-inline: 0;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #FFF;
+  background: linear-gradient(transparent, rgba(40, 30, 42, 0.72));
+  text-align: start;
+}
+.gallery-item.broken {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+/* ── Favorites ── */
+.favorites-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.4rem 1.8rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  max-width: 720px;
+}
+.favorite-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1rem;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s;
+  text-align: start;
+  width: 100%;
+}
+.favorite-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.favorite-icon { color: var(--accent-strong); flex-shrink: 0; margin-top: 0.15rem; }
+.favorite-icon svg { width: 17px; height: 17px; fill: currentColor; }
+.favorite-body { flex: 1; min-width: 0; }
+.favorite-text { margin: 0 0 0.3rem; font-size: 0.95rem; overflow-wrap: anywhere; }
+.favorite-thumb { width: 54px; height: 54px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; }
+.favorite-meta { font-size: 0.74rem; color: var(--muted); display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.favorite-meta strong { color: var(--accent-strong); }

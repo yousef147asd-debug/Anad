@@ -1,0 +1,125 @@
+/* ═══════════════════════════════════════════════════════
+   Our Little World ♡ — responsive.css
+   Mobile-first refinements & breakpoints
+   ═══════════════════════════════════════════════════════ */
+
+/* Bottom nav hidden on desktop */
+.bottom-nav { display: none; }
+.drawer-scrim { display: none; }
+
+/* ── Tablet: collapse context panel ── */
+@media (max-width: 1180px) {
+  .app { grid-template-columns: 240px minmax(0, 1fr); }
+  .context-panel { display: none; }
+}
+
+/* ── Small tablet / large phone ── */
+@media (max-width: 860px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+
+  /* Sidebar becomes a slide-out drawer */
+  .sidebar {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: min(300px, 84vw);
+    z-index: 80;
+    transform: translateX(-105%);
+    transition: transform 0.35s var(--ease-soft);
+    box-shadow: var(--shadow-lift);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .drawer-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: rgba(60, 45, 62, 0.35);
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.25s;
+  }
+
+  .drawer-toggle { display: inline-flex; }
+  .chat-header { padding-inline: 0.8rem; }
+  .chat-title { font-size: 1.12rem; }
+
+  .chat-scroll { padding-inline: 0.8rem; }
+  .composer { padding-inline: 0.7rem; }
+  .attachment-preview { margin-inline: 0.7rem; }
+
+  .section-header { padding: 1.1rem 1rem 0.8rem; }
+  .section-title { font-size: 1.35rem; }
+  .memory-timeline, .gallery-grid, .favorites-list { padding-inline: 1rem; }
+
+  .msg-bubble { max-width: 85%; }
+
+  /* Message actions always reachable on touch */
+  .msg-actions { opacity: 1; }
+
+  /* Bottom navigation */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 50;
+    background: var(--header-glass);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    padding: 0.3rem 0.4rem calc(0.3rem + env(safe-area-inset-bottom));
+  }
+  .bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.45rem 0.2rem;
+    font-size: 0.66rem;
+    font-weight: 700;
+    color: var(--muted);
+    border-radius: var(--radius-md);
+    min-height: 48px;
+  }
+  .bottom-nav-item.active { color: var(--accent-strong); }
+  .bottom-nav-item svg { width: 21px; height: 21px; }
+
+  /* Leave room for bottom nav */
+  .composer { padding-bottom: calc(4.4rem + env(safe-area-inset-bottom)); }
+  .view-memories .memory-timeline,
+  .view-gallery .gallery-grid,
+  .view-favorites .favorites-list { padding-bottom: 5rem; }
+  .toast-root { bottom: calc(4.6rem + env(safe-area-inset-bottom)); }
+
+  /* Comfortable touch targets */
+  .icon-btn { width: 44px; height: 44px; }
+
+  /* Full-screen-ish modals */
+  .modal-backdrop { padding: 0; place-items: end center; }
+  .modal {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    animation: sheetIn 0.35s var(--ease-spring);
+  }
+  @keyframes sheetIn {
+    from { opacity: 0; transform: translateY(60px); }
+  }
+
+  .field-row { grid-template-columns: 1fr; }
+
+  .viewer-prev, .viewer-next { display: none; }
+}
+
+/* ── Small phones ── */
+@media (max-width: 400px) {
+  .profile-cards { grid-template-columns: 1fr; }
+  .name-form { flex-direction: column; }
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+  .memory-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Large desktops: cap line length ── */
+@media (min-width: 1500px) {
+  .memory-timeline, .favorites-list { max-width: 1100px; }
+}
